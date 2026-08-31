@@ -1,21 +1,27 @@
+const DOWNLOAD_MONTH = '2026-09';
+
 document.querySelectorAll('[data-wallpaper]').forEach((button) => {
   button.addEventListener('click', () => {
     const wallpaper = button.dataset.wallpaper;
 
-    // 第一版先在瀏覽器 Console 留下下載事件。
-    // 部署到 Cloudflare 後，可以把這裡改成呼叫 /api/download，
-    // 將 wallpaper、時間等資料寫入 D1。
     console.info('[Painteeme download]', {
       wallpaper,
+      month: DOWNLOAD_MONTH,
       timestamp: new Date().toISOString()
     });
 
-    // 如果未來有 Cloudflare Functions，可取消下列註解：
-    // fetch('/api/download', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ wallpaper })
-    // }).catch(() => {});
+    // 不等待統計結果，避免 API 錯誤影響原本的圖片下載。
+    fetch('/api/download', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        wallpaper,
+        month: DOWNLOAD_MONTH
+      }),
+      keepalive: true
+    }).catch((error) => {
+      console.warn('[Painteeme download tracking failed]', error);
+    });
   });
 });
 
