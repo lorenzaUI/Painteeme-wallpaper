@@ -96,6 +96,13 @@ h1 {
   font-size: 12px;
 }
 
+.preview {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+
 .wallpaper-grid {
   display: grid;
   grid-template-columns: 1fr;

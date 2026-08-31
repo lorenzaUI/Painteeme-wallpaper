@@ -18,3 +18,14 @@ document.querySelectorAll('[data-wallpaper]').forEach((button) => {
     // }).catch(() => {});
   });
 });
+
+
+document.querySelectorAll('.preview').forEach((image) => {
+  image.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+  });
+
+  image.addEventListener('dragstart', (event) => {
+    event.preventDefault();
+  });
+});
