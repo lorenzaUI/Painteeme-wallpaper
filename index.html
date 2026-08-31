@@ -3,106 +3,165 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#F8F3E7" />
-  <meta name="description" content="Painteeme｜想當魚的小海牛，每月免費手機桌布下載。" />
+  <meta name="theme-color" content="#fffdf9" />
+  <meta
+    name="description"
+    content="Painteeme｜想當魚的小海牛，免費手機桌布下載。"
+  />
   <title>Painteeme｜免費手機桌布下載</title>
-  <!-- favicon -->
-  <link rel="shortcut icon" href="assets/painteeme.ico" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/painteeme.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+  />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <main class="page-shell">
+  <div class="page-shell">
     <header class="hero">
-      <p class="brand">Painteeme｜想當魚的小海牛🐟</p>
-      <div class="hero-copy">
-        <p class="eyebrow">FREE WALLPAPER · 2026.09</p>
-        <h1>九月，保持優雅。</h1>
-        <p class="subtitle">
-          柔柔的雲、淺紫色桔梗，還有一隻慢慢過生活的小海牛。
-          把九月放進手機裡，陪你每天留一點溫柔。
-        </p>
+      <div class="brand-intro">
+        <img
+          class="brand-logo"
+          src="./assets/jpg/brandsLOGO.jpg"
+          alt="Painteeme 品牌 Logo"
+          width="100"
+          height="100"
+        />
+        <p>想當魚的小海牛</p>
       </div>
-      <div class="mini-note">September Wallpaper Collection</div>
+
+      <div class="hero-content">
+        <img
+          class="hero-banner"
+          src="./assets/jpg/banner.jpg"
+          alt="Painteeme 免費手機桌布，展示鎖定畫面與主畫面"
+          width="1280"
+          height="670"
+        />
+
+        <div class="hero-copy">
+          <h1>九月，保持優雅。</h1>
+          <p>
+            柔柔的雲、淺紫色桔梗，還有一隻慢慢過生活的小海牛。<br />
+            把九月放進手機裡，陪你每天留一點溫柔。
+          </p>
+        </div>
+
+        <div class="feature-meta">
+          <p>September Wallpaper Collection</p>
+          <time datetime="2026-08-31">2026年08月31日</time>
+        </div>
+      </div>
     </header>
 
-    <section class="wallpaper-grid" aria-label="桌布下載">
-      <article class="wallpaper-card">
-        <div class="preview-wrap">
-          <img
-            src="./assets/jpg/lockscreen.jpg"
-            alt="Painteeme 九月鎖定畫面桌布預覽"
-            class="preview"
-            onerror="this.src='./assets/svg/lockscreen-placeholder.svg'"
-            draggable="false"
-          />
-        </div>
-        <div class="card-body">
-          <div>
-            <p class="card-kicker">01 · LOCK SCREEN</p>
-            <h2>鎖定畫面版</h2>
+    <main>
+      <section class="wallpaper-grid" aria-label="手機桌布下載">
+        <article class="wallpaper-card">
+          <div class="preview-wrap">
+            <img
+              src="./assets/jpg/lockscreen.jpg"
+              alt="Painteeme 鎖定畫面桌布預覽"
+              class="preview"
+              onerror="this.src='./assets/svg/lockscreen-placeholder.svg'"
+              draggable="false"
+            />
           </div>
+          <div class="card-body">
+            <div>
+              <p class="card-kicker">LOCK SCREEN</p>
+              <h2>鎖定畫面</h2>
+            </div>
+            <a
+              class="download-btn"
+              href="./assets/jpg/lockscreen.jpg"
+              download="painteeme-2026-09-lockscreen.jpg"
+              data-wallpaper="lockscreen"
+              aria-label="下載鎖定畫面桌布原尺寸"
+            >
+              <span>下載原尺寸</span>
+              <span class="material-symbols-rounded" aria-hidden="true">download</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="wallpaper-card">
+          <div class="preview-wrap">
+            <img
+              src="./assets/jpg/homescreen.jpg"
+              alt="Painteeme 主畫面桌布預覽"
+              class="preview"
+              onerror="this.src='./assets/svg/homescreen-placeholder.svg'"
+              draggable="false"
+            />
+          </div>
+          <div class="card-body">
+            <div>
+              <p class="card-kicker">HOME SCREEN</p>
+              <h2>主畫面</h2>
+            </div>
+            <a
+              class="download-btn"
+              href="./assets/jpg/homescreen.jpg"
+              download="painteeme-2026-09-homescreen.jpg"
+              data-wallpaper="homescreen"
+              aria-label="下載主畫面桌布原尺寸"
+            >
+              <span>下載原尺寸</span>
+              <span class="material-symbols-rounded" aria-hidden="true">download</span>
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <section class="usage" aria-labelledby="usage-title">
+        <div class="usage-heading">
+          <p class="section-kicker">HOW TO USE</p>
+          <h2 id="usage-title">下載方式</h2>
+        </div>
+        <div class="usage-copy">
+          <p>
+            點擊「下載原尺寸」即可取得高畫質桌布，下載後再至手機相簿設定為鎖定畫面或主畫面。
+          </p>
+          <p class="copyright-note">
+            桌布提供個人使用，請勿商用、重製販售或移除作者資訊。
+          </p>
+        </div>
+      </section>
+
+      <section class="brand-profile" aria-label="關於 Painteeme">
+        <img
+          class="profile-logo"
+          src="./assets/jpg/brandsLOGO.jpg"
+          alt=""
+          width="76"
+          height="76"
+        />
+        <div class="profile-copy">
+          <h2>Hi！我是想當魚的小海牛</h2>
+          <p>Painteeme．十木米 | 布作的品牌，繪畫的起源</p>
           <a
-            class="download-btn"
-            href="./assets/jpg/lockscreen.jpg"
-            download="painteeme-2026-09-lockscreen.jpg"
-            data-wallpaper="lockscreen"
+            class="instagram-link"
+            href="https://www.instagram.com/painteeme/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            下載原尺寸
-            <span aria-hidden="true">↓</span>
+            <span class="material-symbols-rounded" aria-hidden="true">photo_camera</span>
+            <span>Instagram</span>
           </a>
         </div>
-      </article>
+      </section>
+    </main>
+  </div>
 
-      <article class="wallpaper-card">
-        <div class="preview-wrap">
-          <img
-            src="./assets/jpg/homescreen.jpg"
-            alt="Painteeme 九月主畫面桌布預覽"
-            class="preview"
-            onerror="this.src='./assets/svg/homescreen-placeholder.svg'"
-          />
-        </div>
-        <div class="card-body">
-          <div>
-            <p class="card-kicker">02 · HOME SCREEN</p>
-            <h2>主畫面版</h2>
-          </div>
-          <a
-            class="download-btn"
-            href="./assets/homescreen.jpg"
-            download="painteeme-2026-09-homescreen.jpg"
-            data-wallpaper="homescreen"
-          >
-            下載原尺寸
-            <span aria-hidden="true">↓</span>
-          </a>
-        </div>
-      </article>
-    </section>
-
-    <section class="usage">
-      <div>
-        <p class="eyebrow">HOW TO USE</p>
-        <h2>下載方式</h2>
-      </div>
-      <p>
-        點擊「下載原尺寸」即可取得高畫質桌布，下載後再至手機相簿設定為鎖定畫面或主畫面。
-      </p>
-      <p class="copyright">
-        桌布提供個人使用，請勿商用、重製販售或移除作者資訊。
-      </p>
-    </section>
-
-    <footer>
-      <p>© 2026 Painteeme. Made gently by 想當魚的小海牛.</p>
-      <a href="https://www.instagram.com/painteeme/" target="_blank" rel="noreferrer">
-        Instagram ↗
-      </a>
-    </footer>
-  </main>
+  <footer class="site-footer">
+    <p>© 2026 Painteeme 十木米</p>
+  </footer>
 
   <script src="./script.js"></script>
 </body>
