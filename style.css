@@ -369,3 +369,30 @@ h2 {
     padding: 32px 36px;
   }
 }
+
+/* 每月只有一款時，在桌機置中呈現，手機維持單欄。 */
+.wallpaper-grid-single {
+  grid-template-columns: minmax(0, 1fr);
+  width: min(100%, 440px);
+  margin-inline: auto;
+}
+.wallpaper-grid-single .card-body {
+  flex-direction: column;
+  align-items: stretch;
+}
+.wallpaper-grid-single .download-btn { width: 100%; }
+.feature-meta .collection-note { background: none; color: var(--muted); }
+
+[hidden] { display: none !important; }
+.page-content { min-width: 0; }
+.page-content .hero { margin-bottom: 40px; }
+main > section[data-collection] > .hero-content { margin-inline: auto; }
+.month-nav { margin-bottom: 32px; padding: 20px; background: var(--paper); border-radius: var(--radius-large); }
+.month-nav h2 { font-size: var(--font-title); margin-bottom: 12px; }
+.month-nav a { display: block; padding: 12px; border-radius: 12px; font-size: var(--font-small); text-decoration: none; }
+.month-nav a[aria-current="page"] { background: var(--soft-pink); font-weight: 600; }
+.month-nav a:focus-visible { outline: 3px solid var(--lavender); outline-offset: 3px; }
+@media (min-width: 1024px) {
+  .page-shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; }
+  .month-nav { position: sticky; top: 24px; align-self: start; }
+}
