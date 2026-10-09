@@ -255,6 +255,12 @@ h2 {
   font-size: var(--font-small);
 }
 
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
 .instagram-link {
   width: fit-content;
   display: inline-flex;
