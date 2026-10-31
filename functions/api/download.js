@@ -21,6 +21,9 @@ const ALLOWED_BROWSERS = new Set([
   'other'
 ]);
 const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
+const SOURCE_PATTERN = /^[a-z0-9_-]{1,32}$/;
+const INSERT_DOWNLOAD_EVENT_WITH_SOURCE =
+  'INSERT INTO download_events (wallpaper, month, device_type, os, browser, source) VALUES (?, ?, ?, ?, ?, ?)';
 const INSERT_DOWNLOAD_EVENT =
   'INSERT INTO download_events (wallpaper, month, device_type, os, browser) VALUES (?, ?, ?, ?, ?)';
 
@@ -56,6 +59,8 @@ export async function onRequest({ request, env }) {
   const deviceType = body?.device_type;
   const os = body?.os;
   const browser = body?.browser;
+  const rawSource = body?.source;
+  const source = typeof rawSource === 'string' && SOURCE_PATTERN.test(rawSource) ? rawSource : null;
 
   if (
     !ALLOWED_WALLPAPERS.has(wallpaper) ||
@@ -69,10 +74,21 @@ export async function onRequest({ request, env }) {
   }
 
   try {
-    await env.DB
-      .prepare(INSERT_DOWNLOAD_EVENT)
-      .bind(wallpaper, month, deviceType, os, browser)
-      .run();
+    try {
+      await env.DB
+        .prepare(INSERT_DOWNLOAD_EVENT_WITH_SOURCE)
+        .bind(wallpaper, month, deviceType, os, browser, source)
+        .run();
+    } catch (error) {
+      // 還沒執行 docs/channel-analytics.sql 加上 source 欄位時，照舊記錄（只是少了來源）
+      if (!/no such column|has no column/i.test(String(error?.message))) {
+        throw error;
+      }
+      await env.DB
+        .prepare(INSERT_DOWNLOAD_EVENT)
+        .bind(wallpaper, month, deviceType, os, browser)
+        .run();
+    }
 
     return jsonResponse({ success: true }, 200);
   } catch (error) {

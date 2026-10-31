@@ -33,3 +33,10 @@ Pages Functions 的 `/api/download` 使用 D1 綁定 `DB`（資料庫 `painteeme
 桌機（1024px 起）使用左側月份導覽，手機與平板置於內容上方。根網址預設顯示十月；`/#2026-09` 直接開啟九月，`/#2026-10` 開啟十月。九月原有 JPG 路徑保持不變。沒有 JavaScript 時兩月份皆顯示，月份連結以錨點導覽。
 
 目前完成桌布區擴充；角色、商品型錄與完整品牌首頁尚未加入。
+
+## 通路來源（QR code）
+
+- 網址加上 `?utm_source=來源名稱`（英文小寫、數字、`_`、`-`）就會記錄來源，例如誠品新店裕隆城市集：`https://wallpaper.painteeme.com/?utm_source=yulon`。
+- 帶來源進站會在 `visit_events` 記一筆（掃碼人次）；之後按下載，`download_events.source` 也會帶同一個來源。
+- IG 的通路 QR code 用 `/ig/?utm_source=來源名稱`：先記一筆 `page = ig`，再跳到 Instagram。
+- 第一次使用前要在 D1 執行 `docs/channel-analytics.sql` 的「第一次設定」兩段；查詢也在同一個檔案。還沒執行前，下載照常記錄，只是沒有來源。

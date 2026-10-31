@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>前往 Instagram｜painteeme</title>
+  <link rel="icon" href="/assets/painteeme.ico" />
+  <style>
+    /* 通路 IG QR code 的中繼頁：/ig/?utm_source=yulon
+       先記一筆掃碼（visit_events，page = ig），再跳到 Instagram。記錄失敗也照樣跳轉。 */
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.5rem;
+      text-align: center; background: #FFF8F0; color: #4a433b;
+      font-family: system-ui, -apple-system, "PingFang TC", "Noto Sans TC", sans-serif; }
+    p { font-size: 1.0625rem; line-height: 1.7; margin: 0 0 1.25rem; }
+    a { display: inline-block; min-height: 48px; box-sizing: border-box; padding: .8rem 1.75rem;
+      border-radius: 999px; background: #4a433b; color: #fff; font-weight: 700; text-decoration: none; }
+    a:focus-visible { outline: 3px solid #9A7355; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>小海牛帶你去 Instagram <strong>@painteeme</strong>…</p>
+    <a id="go" href="https://www.instagram.com/painteeme/">前往 Instagram</a>
+  </main>
+  <script>
+    (function () {
+      var target = document.getElementById('go').href;
+      var done = false;
+      function go() { if (!done) { done = true; location.replace(target); } }
+      var source = (new URLSearchParams(location.search).get('utm_source') || '').trim().toLowerCase();
+      if (!/^[a-z0-9_-]{1,32}$/.test(source)) { go(); return; }
+      var ua = navigator.userAgent || '';
+      var ipad = /Mac/i.test(navigator.platform || '') && navigator.maxTouchPoints > 1;
+      var device = ipad || /iPad|Tablet/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua)) ? 'tablet'
+        : /Mobi|iPhone|iPod|Android/i.test(ua) ? 'mobile' : 'desktop';
+      var os = ipad || /iPhone|iPad|iPod/i.test(ua) ? 'iOS' : /Android/i.test(ua) ? 'Android'
+        : /Windows/i.test(ua) ? 'Windows' : /Mac OS X/i.test(ua) ? 'macOS' : /Linux/i.test(ua) ? 'Linux' : 'unknown';
+      var browser = /EdgA|EdgiOS|Edg\//i.test(ua) ? 'Edge' : /FxiOS|Firefox\//i.test(ua) ? 'Firefox'
+        : /OPR\/|Opera|SamsungBrowser|Vivaldi/i.test(ua) ? 'other' : /CriOS|Chrome\//i.test(ua) ? 'Chrome'
+        : /Safari\//i.test(ua) ? 'Safari' : 'other';
+      fetch('/api/visit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page: 'ig', source: source, device_type: device, os: os, browser: browser }),
+        keepalive: true
+      }).then(go, go);
+      setTimeout(go, 1500); // 網路慢時最多等 1.5 秒
+    })();
+  </script>
+</body>
+</html>

@@ -56,6 +56,41 @@ function getDeviceInfo() {
   };
 }
 
+// 通路來源：QR code 或連結帶 ?utm_source=yulon（也接受 #2026-10?utm_source=ig 這種寫法）。
+// 只留英數、底線、連字號，存在 sessionStorage，切換月份後下載仍記得來源。
+function getSource() {
+  const read = (query) => new URLSearchParams(query).get('utm_source') || '';
+  let source = read(location.search) || read(location.hash.split('?')[1] || '');
+  source = source.trim().toLowerCase();
+  if (!/^[a-z0-9_-]{1,32}$/.test(source)) {
+    source = '';
+  }
+  try {
+    if (source) {
+      sessionStorage.setItem('painteemeSource', source);
+    } else {
+      source = sessionStorage.getItem('painteemeSource') || '';
+    }
+  } catch {
+    // 無痕模式等情況存不了，就只用網址上的來源
+  }
+  return source;
+}
+
+const pageSource = getSource();
+
+// 帶來源進站時記一筆瀏覽（掃 QR code 的人次），不影響頁面顯示
+if (pageSource && new URLSearchParams(location.search).has('utm_source')) {
+  fetch('/api/visit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ page: 'wallpaper', source: pageSource, ...getDeviceInfo() }),
+    keepalive: true
+  }).catch((error) => {
+    console.warn('[Painteeme visit tracking failed]', error);
+  });
+}
+
 document.querySelectorAll('[data-wallpaper]').forEach((button) => {
   button.addEventListener('click', () => {
     const wallpaper = button.dataset.wallpaper;
@@ -76,6 +111,7 @@ document.querySelectorAll('[data-wallpaper]').forEach((button) => {
       body: JSON.stringify({
         wallpaper,
         month,
+        source: pageSource,
         ...deviceInfo
       }),
       keepalive: true
@@ -107,7 +143,7 @@ document.querySelectorAll('.preview').forEach((image) => {
 
 // 可分享的月份入口；沒有 JavaScript 時仍可用錨點瀏覽兩個月份。
 function showCollection() {
-  const requestedMonth = location.hash.slice(1);
+  const requestedMonth = location.hash.slice(1).split('?')[0];
   const month = ['2026-10', '2026-09'].includes(requestedMonth)
     ? requestedMonth : '2026-10';
   document.querySelectorAll('[data-collection]').forEach((section) => {
