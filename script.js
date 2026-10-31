@@ -144,8 +144,8 @@ document.querySelectorAll('.preview').forEach((image) => {
 // 可分享的月份入口；沒有 JavaScript 時仍可用錨點瀏覽兩個月份。
 function showCollection() {
   const requestedMonth = location.hash.slice(1).split('?')[0];
-  const month = ['2026-10', '2026-09'].includes(requestedMonth)
-    ? requestedMonth : '2026-10';
+  const month = ['2026-11', '2026-10', '2026-09'].includes(requestedMonth)
+    ? requestedMonth : '2026-11';
   document.querySelectorAll('[data-collection]').forEach((section) => {
     section.hidden = section.dataset.collection !== month;
   });

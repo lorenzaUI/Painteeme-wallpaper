@@ -4,6 +4,7 @@
 
 ## 桌布素材
 
+- 十一月：`assets/jpg/2026-11/banner.jpg` 與 `assets/jpg/2026-11/lockscreen.jpg`。
 - 十月：`assets/jpg/2026-10/banner.jpg` 與 `assets/jpg/2026-10/lockscreen.jpg`。
 - 九月：保留原有 `assets/jpg/lockscreen.jpg` 與 `assets/jpg/homescreen.jpg`。
 - 十月僅提供鎖定畫面，橫幅中的主畫面為搭配示意。
@@ -30,7 +31,7 @@ Pages Functions 的 `/api/download` 使用 D1 綁定 `DB`（資料庫 `painteeme
 
 ## 月份導覽
 
-桌機（1024px 起）使用左側月份導覽，手機與平板置於內容上方。根網址預設顯示十月；`/#2026-09` 直接開啟九月，`/#2026-10` 開啟十月。九月原有 JPG 路徑保持不變。沒有 JavaScript 時兩月份皆顯示，月份連結以錨點導覽。
+桌機（1024px 起）使用左側月份導覽，手機與平板置於內容上方。根網址預設顯示最新月份（十一月）；`/#2026-11` 開啟十一月，`/#2026-09` 直接開啟九月，`/#2026-10` 開啟十月。九月原有 JPG 路徑保持不變。沒有 JavaScript 時兩月份皆顯示，月份連結以錨點導覽。
 
 目前完成桌布區擴充；角色、商品型錄與完整品牌首頁尚未加入。
 
