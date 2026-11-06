@@ -1,0 +1,231 @@
+/* =========================================================
+   十木米 painteeme 品牌設計 token ＋ Bootstrap 5.3 覆寫
+   全站共用，各頁在 bootstrap.min.css 之後載入。
+
+   【品牌色票】（2026/11/06 更新）
+     主要色：嫩粉 #FBD3C7、奶油米白 #FFF8F0、焦糖 #B27E32、深咖啡 #594124
+     文字色：灰 #505451
+     點綴色：薰衣草 #DBB9CF、Sage #A9B39A、奶油黃 #FCE0A9、寶寶藍 #CAECFF
+   淺色（嫩粉、米白、薰衣草、Sage、奶油黃、寶寶藍）只當底色或裝飾，不拿來當文字色。
+   焦糖 #B27E32 對米白只有 3.4：只用在裝飾、框線、大字；
+   需要當文字或按鈕底色時，改用加深的「焦糖深」#7E5620。
+
+   【顏色階層】照 Bootstrap 的主題色分類，每一組都有四個層次：
+     實色（按鈕、徽章）／ -subtle 淡底 ／ -border-subtle 淡框線 ／ -text-emphasis 深字
+   ┌───────────┬────────────────┬──────────────────────────────┐
+   │ primary   │ 深咖啡         │ 主要按鈕、連結、價格           │
+   │ secondary │ 焦糖           │ 次要按鈕、英文點綴字           │
+   │ success   │ Sage 綠        │ 點綴裝飾、「上架中」「完成」   │
+   │ info      │ 薰衣草         │ 提示訊息                       │
+   │ warning   │ 奶油黃         │ 提醒、「即將推出」「預購」     │
+   │ danger    │ 磚紅（功能色） │ 錯誤、售完                     │
+   │ light     │ 奶油米白       │ 頁面底色                       │
+   │ dark      │ 深咖啡         │ 標題、頁尾底色                 │
+   └───────────┴────────────────┴──────────────────────────────┘
+
+   【無障礙】（WCAG 2.2 AA，數字為對比值；改色碼請重新計算）
+   - 內文灰 #505451：米白 7.3、嫩粉 5.6、淡粉 6.6、白 7.7
+   - 標題深咖啡 #594124：米白 9.0、嫩粉 6.9
+   - 焦糖深 #7E5620（英文點綴字）：米白 6.2、嫩粉 4.7
+   - 實色按鈕：白字在 primary 9.5、secondary 6.5、success 5.8、info 7.4、danger 6.0
+   - warning 按鈕：深咖啡字 7.4，另加深色外框（黃色本身對米白不到 3:1，需外框補足）
+   - 每組 -text-emphasis 深字放在自己的淡底上都 ≥ 6.5
+   - 內文最小 16px；輔助小字最小 14px；行高 1.8
+   ========================================================= */
+
+/* 英文點綴：Fredoka One 圓體（SIL Open Font License，可自由用於網站；已精簡為英文字） */
+@font-face {
+  font-family: "Fredoka One";
+  src: url("/assets/fonts/fredoka-one.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  /* ---------- 品牌原色（只當底色／裝飾） ---------- */
+  --pt-blush: #FBD3C7;        /* 嫩粉（主要） */
+  --pt-blush-soft: #FDEAE4;   /* 淡粉 */
+  --pt-ivory: #FFF8F0;        /* 奶油米白（主要） */
+  --pt-cream: #F7EEE3;        /* 奶油米白（深一階，區塊交替用） */
+  --pt-caramel: #B27E32;      /* 焦糖（主要，裝飾／框線／大字） */
+  --pt-caramel-text: #7E5620; /* 焦糖深：需要當文字時用這個 */
+  --pt-brown: #594124;        /* 深咖啡（主要） */
+  --pt-lilac: #DBB9CF;        /* 薰衣草（點綴） */
+  --pt-lilac-soft: #F3E7EF;
+  --pt-sage: #A9B39A;         /* Sage（點綴） */
+  --pt-sage-soft: #E6EADB;
+  --pt-butter: #FCE0A9;       /* 奶油黃（點綴） */
+  --pt-butter-soft: #FEF1D6;
+  --pt-babyblue: #CAECFF;     /* 寶寶藍（點綴） */
+  --pt-babyblue-soft: #E8F6FF;
+
+  /* ---------- 文字 ---------- */
+  --pt-text: #505451;         /* 內文：灰 */
+  --pt-text-muted: #585C59;   /* 次要文字 */
+  --pt-heading: #594124;      /* 標題：深咖啡 */
+  --pt-line: #E9DCCB;         /* 裝飾分隔線（不承載資訊） */
+  --pt-line-strong: #878A87;  /* 輸入框、需要被看到的框線（對米白 3.3） */
+
+  /* 舊名稱保留，指向新色（其他頁面還在用） */
+  --pt-charcoal: var(--pt-text);
+  --pt-ink: var(--pt-heading);
+  --pt-cocoa: var(--pt-heading);
+
+  /* ---------- 主題色階層 ---------- */
+  --pt-primary: #594124;  --pt-primary-rgb: 89, 65, 36;
+  --pt-primary-hover: #47331C;
+  --pt-primary-subtle: #F5EBDD; --pt-primary-border: #D9C3A3; --pt-primary-emphasis: #47331C;
+
+  --pt-secondary: #7E5620; --pt-secondary-rgb: 126, 86, 32;
+  --pt-secondary-hover: #6A481A;
+  --pt-secondary-subtle: #F6E9D6; --pt-secondary-border: #B27E32; --pt-secondary-emphasis: #5C3F17;
+
+  --pt-success: #5A6A4C;  --pt-success-rgb: 90, 106, 76;
+  --pt-success-hover: #4A583E;
+  --pt-success-subtle: #E6EADB; --pt-success-border: #A9B39A; --pt-success-emphasis: #43503A;
+
+  --pt-info: #6E4A64;     --pt-info-rgb: 110, 74, 100;
+  --pt-info-hover: #5C3A52;
+  --pt-info-subtle: #F3E7EF; --pt-info-border: #DBB9CF; --pt-info-emphasis: #5C3A52;
+
+  --pt-warning: #FCE0A9;  --pt-warning-rgb: 252, 224, 169;
+  --pt-warning-hover: #F7D08A;
+  --pt-warning-subtle: #FEF1D6; --pt-warning-border: #FCE0A9; --pt-warning-emphasis: #6B4E14;
+
+  --pt-danger: #A8433A;   --pt-danger-rgb: 168, 67, 58;
+  --pt-danger-hover: #8E372F;
+  --pt-danger-subtle: #F9E1DC; --pt-danger-border: #EDB9B0; --pt-danger-emphasis: #7C2F28;
+
+  --pt-light: #FFF8F0;    --pt-light-rgb: 255, 248, 240;
+  --pt-dark: #594124;     --pt-dark-rgb: 89, 65, 36;
+
+  /* ---------- 字體 ---------- */
+  --pt-font-zh-display: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --pt-font-script: "Fredoka One", "Noto Sans TC", system-ui, sans-serif;
+  --pt-font-body: "Noto Sans TC", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+
+  /* ---------- 套進 Bootstrap 5.3 變數 ---------- */
+  --bs-body-font-family: var(--pt-font-body);
+  --bs-body-font-size: 1rem;
+  --bs-body-bg: var(--pt-ivory);
+  --bs-body-bg-rgb: 255, 248, 240;
+  --bs-body-color: var(--pt-text);
+  --bs-body-color-rgb: 80, 84, 81;
+  --bs-emphasis-color: var(--pt-heading);
+  --bs-emphasis-color-rgb: 89, 65, 36;
+  --bs-secondary-color: var(--pt-text-muted);
+  --bs-secondary-bg: var(--pt-cream);
+  --bs-tertiary-bg: var(--pt-blush-soft);
+  --bs-heading-color: var(--pt-heading);
+  --bs-link-color: var(--pt-primary);
+  --bs-link-color-rgb: var(--pt-primary-rgb);
+  --bs-link-hover-color: var(--pt-primary-emphasis);
+  --bs-link-hover-color-rgb: 71, 51, 28;
+  --bs-border-color: var(--pt-line);
+  --bs-focus-ring-color: rgba(89, 65, 36, .45);
+  --bs-border-radius: .75rem;
+  --bs-border-radius-lg: 1.25rem;
+  --bs-border-radius-pill: 50rem;
+
+  --bs-primary: var(--pt-primary);     --bs-primary-rgb: var(--pt-primary-rgb);
+  --bs-secondary: var(--pt-secondary); --bs-secondary-rgb: var(--pt-secondary-rgb);
+  --bs-success: var(--pt-success);     --bs-success-rgb: var(--pt-success-rgb);
+  --bs-info: var(--pt-info);           --bs-info-rgb: var(--pt-info-rgb);
+  --bs-warning: var(--pt-warning);     --bs-warning-rgb: var(--pt-warning-rgb);
+  --bs-danger: var(--pt-danger);       --bs-danger-rgb: var(--pt-danger-rgb);
+  --bs-light: var(--pt-light);         --bs-light-rgb: var(--pt-light-rgb);
+  --bs-dark: var(--pt-dark);           --bs-dark-rgb: var(--pt-dark-rgb);
+
+  --bs-primary-bg-subtle: var(--pt-primary-subtle);     --bs-primary-border-subtle: var(--pt-primary-border);     --bs-primary-text-emphasis: var(--pt-primary-emphasis);
+  --bs-secondary-bg-subtle: var(--pt-secondary-subtle); --bs-secondary-border-subtle: var(--pt-secondary-border); --bs-secondary-text-emphasis: var(--pt-secondary-emphasis);
+  --bs-success-bg-subtle: var(--pt-success-subtle);     --bs-success-border-subtle: var(--pt-success-border);     --bs-success-text-emphasis: var(--pt-success-emphasis);
+  --bs-info-bg-subtle: var(--pt-info-subtle);           --bs-info-border-subtle: var(--pt-info-border);           --bs-info-text-emphasis: var(--pt-info-emphasis);
+  --bs-warning-bg-subtle: var(--pt-warning-subtle);     --bs-warning-border-subtle: var(--pt-warning-border);     --bs-warning-text-emphasis: var(--pt-warning-emphasis);
+  --bs-danger-bg-subtle: var(--pt-danger-subtle);       --bs-danger-border-subtle: var(--pt-danger-border);       --bs-danger-text-emphasis: var(--pt-danger-emphasis);
+  --bs-light-bg-subtle: var(--pt-ivory);                --bs-light-border-subtle: var(--pt-line);                 --bs-light-text-emphasis: var(--pt-heading);
+  --bs-dark-bg-subtle: #EFE6DA;                         --bs-dark-border-subtle: #D9C3A3;                         --bs-dark-text-emphasis: var(--pt-heading);
+}
+
+body { line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+/* 滿版：頁面至少一個螢幕高，內容不夠時，最後一個區塊往下延伸到頁尾（頁尾永遠貼底，不會露出空白） */
+body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+main { flex: 1 0 auto; display: flex; flex-direction: column; }
+main > :last-child { flex-grow: 1; }
+small, .small { font-size: .875rem; }   /* 小字最小 14px */
+
+/* 中文標題：Noto Sans TC 粗體 */
+h1, h2, h3, .h1, .h2, .h3, .zh-display {
+  font-family: var(--pt-font-zh-display);
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.35;
+}
+.script { font-family: var(--pt-font-script); font-weight: 400; color: var(--pt-caramel-text); letter-spacing: .01em; line-height: 1.2; }
+.text-cocoa { color: var(--pt-heading) !important; }
+.text-caramel { color: var(--pt-caramel-text) !important; }
+
+/* ---------- 按鈕 ----------
+   Bootstrap 的 .btn-primary 等顏色是編譯時寫死的，這裡逐一改成品牌色。 */
+.btn { --bs-btn-font-weight: 500; --bs-btn-padding-x: 1.5rem; --bs-btn-padding-y: .625rem; border-radius: var(--bs-border-radius-pill); min-height: 44px; }
+.btn-primary   { --c: var(--pt-primary);   --h: var(--pt-primary-hover);   --t: #fff; }
+.btn-secondary { --c: var(--pt-secondary); --h: var(--pt-secondary-hover); --t: #fff; }
+.btn-success   { --c: var(--pt-success);   --h: var(--pt-success-hover);   --t: #fff; }
+.btn-info      { --c: var(--pt-info);      --h: var(--pt-info-hover);      --t: #fff; }
+.btn-danger    { --c: var(--pt-danger);    --h: var(--pt-danger-hover);    --t: #fff; }
+.btn-dark      { --c: var(--pt-dark);      --h: #47331C;                   --t: var(--pt-ivory); }
+.btn-light     { --c: var(--pt-ivory);     --h: var(--pt-blush-soft);      --t: var(--pt-heading); }
+.btn-primary, .btn-secondary, .btn-success, .btn-info, .btn-danger, .btn-dark, .btn-light {
+  --bs-btn-color: var(--t); --bs-btn-bg: var(--c); --bs-btn-border-color: var(--c);
+  --bs-btn-hover-color: var(--t); --bs-btn-hover-bg: var(--h); --bs-btn-hover-border-color: var(--h);
+  --bs-btn-active-color: var(--t); --bs-btn-active-bg: var(--h); --bs-btn-active-border-color: var(--h);
+  --bs-btn-disabled-color: var(--t); --bs-btn-disabled-bg: var(--c); --bs-btn-disabled-border-color: var(--c);
+}
+.btn-warning {   /* 黃底深字＋深色外框（黃色對米白不到 3:1，靠外框讓按鈕邊界看得見） */
+  --bs-btn-color: var(--pt-heading); --bs-btn-bg: var(--pt-warning); --bs-btn-border-color: var(--pt-warning-emphasis);
+  --bs-btn-hover-color: var(--pt-heading); --bs-btn-hover-bg: var(--pt-warning-hover); --bs-btn-hover-border-color: var(--pt-warning-emphasis);
+  --bs-btn-active-color: var(--pt-heading); --bs-btn-active-bg: var(--pt-warning-hover); --bs-btn-active-border-color: var(--pt-warning-emphasis);
+}
+.btn-outline-primary   { --c: var(--pt-primary);   --h: var(--pt-primary-subtle); }
+.btn-outline-secondary { --c: var(--pt-secondary); --h: var(--pt-secondary-subtle); }
+.btn-outline-success   { --c: var(--pt-success);   --h: var(--pt-success-subtle); }
+.btn-outline-info      { --c: var(--pt-info);      --h: var(--pt-info-subtle); }
+.btn-outline-danger    { --c: var(--pt-danger);    --h: var(--pt-danger-subtle); }
+.btn-outline-dark      { --c: var(--pt-dark);      --h: var(--pt-secondary-subtle); }
+.btn-outline-primary, .btn-outline-secondary, .btn-outline-success, .btn-outline-info, .btn-outline-danger, .btn-outline-dark {
+  --bs-btn-color: var(--c); --bs-btn-bg: transparent; --bs-btn-border-color: var(--c);
+  --bs-btn-hover-color: var(--c); --bs-btn-hover-bg: var(--h); --bs-btn-hover-border-color: var(--c);
+  --bs-btn-active-color: var(--c); --bs-btn-active-bg: var(--h); --bs-btn-active-border-color: var(--c);
+  border-width: 2px;
+}
+/* 舊的按鈕名稱保留：btn-pt＝主要（深咖啡）、btn-pt-outline＝外框、btn-pt-blush＝嫩粉底深字 */
+.btn-pt { --c: var(--pt-primary); --h: var(--pt-primary-hover); --t: #fff;
+  --bs-btn-color: var(--t); --bs-btn-bg: var(--c); --bs-btn-border-color: var(--c);
+  --bs-btn-hover-color: var(--t); --bs-btn-hover-bg: var(--h); --bs-btn-hover-border-color: var(--h);
+  --bs-btn-active-color: var(--t); --bs-btn-active-bg: var(--h); --bs-btn-active-border-color: var(--h); }
+.btn-pt-outline { --bs-btn-color: var(--pt-heading); --bs-btn-bg: transparent; --bs-btn-border-color: var(--pt-heading);
+  --bs-btn-hover-color: var(--pt-heading); --bs-btn-hover-bg: var(--pt-blush-soft); --bs-btn-hover-border-color: var(--pt-heading);
+  --bs-btn-active-color: var(--pt-heading); --bs-btn-active-bg: var(--pt-blush); --bs-btn-active-border-color: var(--pt-heading); border-width: 2px; }
+.btn-pt-blush { --bs-btn-color: var(--pt-heading); --bs-btn-bg: var(--pt-blush); --bs-btn-border-color: var(--pt-blush);
+  --bs-btn-hover-color: var(--pt-heading); --bs-btn-hover-bg: #F8C0AE; --bs-btn-hover-border-color: #F8C0AE;
+  --bs-btn-active-color: var(--pt-heading); --bs-btn-active-bg: #F8C0AE; --bs-btn-active-border-color: #F8C0AE; }
+
+/* 徽章：text-bg-* 的字色跟著上面的對比規則 */
+.text-bg-warning { color: var(--pt-heading) !important; }
+.text-bg-light { color: var(--pt-heading) !important; }
+
+/* ---------- 表單：外框要清楚（對米白 ≥ 3:1） ---------- */
+.form-control, .form-select { --bs-border-color: var(--pt-line-strong); }
+
+/* ---------- 無障礙 ---------- */
+/* 鍵盤焦點：深暖灰外框＋米白外圈，在所有品牌底色、照片上都看得到 */
+:focus-visible { outline: 3px solid var(--pt-heading) !important; outline-offset: 3px; box-shadow: 0 0 0 6px var(--pt-ivory) !important; }
+.on-dark :focus-visible, .on-dark:focus-visible { outline-color: var(--pt-ivory) !important; box-shadow: 0 0 0 6px var(--pt-heading) !important; }
+
+/* 跳到主要內容 */
+.skip-link { position: absolute; left: 1rem; top: -100px; z-index: 2000; background: var(--pt-heading); color: var(--pt-ivory); padding: .5rem 1rem; border-radius: .5rem; text-decoration: none; }
+.skip-link:focus { top: 1rem; color: var(--pt-ivory); }
+
+/* 使用者偏好減少動態時，關掉動畫 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
