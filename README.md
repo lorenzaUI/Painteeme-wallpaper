@@ -1,5 +1,12 @@
 # Painteeme 免費手機桌布
 
+## 外觀與官網一致（2026/11/06）
+
+- 選單、頁尾、配色、字體跟官網 www.odiliawang.com/painteeme/ 相同，使用 Bootstrap 5.3.8。
+- `assets/css/tokens.css`、`assets/css/painteeme.css`、`assets/fonts/`、`assets/img/logo.png` 是從 odiliawang-site 複製來的；官網改配色或選單樣式時，把這幾個檔案一起換掉。
+- 桌布頁專用的樣式在 `style.css`。
+- 新增月份：`index.html` 的月份按鈕加一行、複製一整段 `<section data-collection>`，`script.js` 的 `MONTHS` 最前面加上月份。
+
 純 HTML / CSS / JavaScript 網站，部署於 Cloudflare Pages。無需建置步驟，部署輸出目錄為專案根目錄。
 
 ## 桌布素材

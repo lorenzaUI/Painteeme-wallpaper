@@ -141,11 +141,12 @@ document.querySelectorAll('.preview').forEach((image) => {
   });
 });
 
-// 可分享的月份入口；沒有 JavaScript 時仍可用錨點瀏覽兩個月份。
+// 可分享的月份入口；沒有 JavaScript 時所有月份都會顯示，用錨點瀏覽。
+// 新增月份：把 'YYYY-MM' 加在最前面（第一個＝打開網站時預設顯示的月份）
+const MONTHS = ['2026-11', '2026-10', '2026-09'];
 function showCollection() {
   const requestedMonth = location.hash.slice(1).split('?')[0];
-  const month = ['2026-11', '2026-10', '2026-09'].includes(requestedMonth)
-    ? requestedMonth : '2026-11';
+  const month = MONTHS.includes(requestedMonth) ? requestedMonth : MONTHS[0];
   document.querySelectorAll('[data-collection]').forEach((section) => {
     section.hidden = section.dataset.collection !== month;
   });
