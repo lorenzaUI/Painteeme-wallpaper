@@ -131,7 +131,7 @@
 
 /* ---------- 頁尾 ---------- */
 .pt-foot { background: var(--pt-dark); color: var(--pt-ivory); padding: 2.5rem 0 3rem; }
-.pt-foot .sign { line-height: 1.4; font-size: 1.75rem; color: var(--pt-blush); }   /* 大字，嫩粉在深咖啡上 6.9 */
+.pt-foot .foot-logo img { display: block; height: 64px; width: auto; }   /* 跟官網頁尾同一個 dark 版 logo */
 .pt-foot a { color: var(--pt-ivory); text-underline-offset: 4px; }
 .pt-foot a:hover { color: var(--pt-blush); }
 
